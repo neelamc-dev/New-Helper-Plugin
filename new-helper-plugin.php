@@ -15,8 +15,7 @@ namespace MadeByAura\Helper;
 
 defined( 'ABSPATH' ) || exit;
 
-const PLUGIN_FILE = __FILE__;
-const PLUGIN_DIR  = __DIR__;
+const PLUGIN_DIR = __DIR__;
 
 /*
  * Map classes in the MadeByAura\Helper namespace to files in src/.
@@ -38,3 +37,5 @@ spl_autoload_register(
 		}
 	}
 );
+
+Plugin::boot();
