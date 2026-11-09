@@ -36,6 +36,10 @@ _Avoid_: Restore, migration
 A change the plugin applies to a copy right after an import so it cannot act like production, such as pausing backup schedules.
 _Avoid_: Post-import task, cleanup
 
+**Safeguard**:
+A protection the plugin keeps on at all times on local and staging sites, whether or not the site came from an import, such as sending Postmark email to its sandbox.
+_Avoid_: Override, guard, protection
+
 **Backup schedule**:
 A recurring backup configured in All-in-One WP Migration that runs automatically and can send backups to remote storage.
 _Avoid_: Cron, scheduled export
