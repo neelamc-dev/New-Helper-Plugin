@@ -38,3 +38,5 @@ spl_autoload_register(
 		}
 	}
 );
+
+Plugin::boot();
