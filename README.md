@@ -43,7 +43,7 @@ define( 'WP_ENVIRONMENT_TYPE', 'staging' );
 
 Every export leaves out the items below, whatever options the person exporting picks. This runs on every environment.
 
-- **Plugins** (folders in `wp-content/plugins`): `postmarkapp-email-integrator`, `klaviyo`, `woocommerce-shipstation-integration`
+- **Plugins** (folders in `wp-content/plugins`): `postmarkapp-email-integrator`, `klaviyo`, `woocommerce-shipstation-integration`. The official Postmark plugin (`postmark-approved-wordpress-plugin`) is deliberately kept: an import fix switches it to a test key on copies instead.
 - **Files and folders** directly in `wp-content`: `ai1wm-backups`, `cache`, `jetpack-waf`, `mu-plugins`, `upgrade`, `upgrade-temp-backup`, `debug.log`
 - **Database tables** (with the site's table prefix): `wc_webhooks`, `woocommerce_api_keys`, `woocommerce_sessions`, `user_registration_sessions`, `woocommerce_log`
 
@@ -56,4 +56,6 @@ new-helper-plugin.php   Plugin header, constants, class autoloader, and boot
 src/Plugin.php          Registers every feature's hooks
 src/Environment.php     Environment detection
 src/<Integration>/      One folder per third-party plugin we adjust
+CONTEXT.md              Glossary of the terms we use (copy, import, import fix, ...)
+docs/adr/               Decision records: what we decided and why
 ```
