@@ -19,7 +19,11 @@ final class ExportExclusions {
 
 	/**
 	 * Plugin folder names inside wp-content/plugins.
-	 * They integrate with live services and must never run on a cloned site.
+	 * They integrate with live services and must never run on a copy.
+	 *
+	 * The official ActiveCampaign Postmark plugin (postmark-approved-wordpress-plugin)
+	 * is deliberately not listed: copies keep it, and an import fix swaps its
+	 * live API key for a test key there instead. See ADR 0005.
 	 */
 	private const PLUGINS = array(
 		'postmarkapp-email-integrator',
