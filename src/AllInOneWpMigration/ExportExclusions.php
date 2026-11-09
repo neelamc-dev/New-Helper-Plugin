@@ -30,7 +30,7 @@ final class ExportExclusions {
 	/**
 	 * Files and folders directly inside wp-content.
 	 */
-	private const CONTENT = array(
+	private const WP_CONTENT_ITEMS = array(
 		'ai1wm-backups',
 		'cache',
 		'jetpack-waf',
@@ -78,12 +78,12 @@ final class ExportExclusions {
 	 * @param mixed $filters Paths All-in-One WP Migration already excludes.
 	 */
 	public function exclude_content( $filters ): array {
-		return array_merge( (array) $filters, self::CONTENT );
+		return array_merge( (array) $filters, self::WP_CONTENT_ITEMS );
 	}
 
 	/**
-	 * Adds our tables to the export's excluded tables, and removes them from
-	 * its explicitly included tables so nothing can bring them back.
+	 * Adds our tables to the export's excluded tables, keeping any the
+	 * person exporting already excluded.
 	 *
 	 * @param mixed $params Export parameters, passed from step to step.
 	 * @return mixed The parameters, unchanged if they are not an array.
@@ -93,20 +93,12 @@ final class ExportExclusions {
 			return $params;
 		}
 
-		$tables = $this->prefixed_tables();
-
 		$params['options']                      = isset( $params['options'] ) ? (array) $params['options'] : array();
 		$params['options']['exclude_db_tables'] = 1;
 
 		$params['excluded_db_tables'] = $this->join_table_list(
-			array_merge( $this->split_table_list( $params['excluded_db_tables'] ?? '' ), $tables )
+			array_merge( $this->split_table_list( $params['excluded_db_tables'] ?? '' ), $this->prefixed_tables() )
 		);
-
-		if ( isset( $params['included_db_tables'] ) ) {
-			$params['included_db_tables'] = $this->join_table_list(
-				array_diff( $this->split_table_list( $params['included_db_tables'] ), $tables )
-			);
-		}
 
 		return $params;
 	}
